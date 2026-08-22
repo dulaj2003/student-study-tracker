@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="login-container">
+    <div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h2 style="margin-bottom: 0;">My Profile</h2>
+            <a href="/profile/edit" class="btn" style="width: auto;">Edit Profile</a>
+        </div>
+
+        <table style="min-width: 700px;">
+            <tr><th>Full Name</th><td>{{ user.full_name }}</td></tr>
+            <tr><th>Registration No.</th><td>{{ user.registration_number }}</td></tr>
+            <tr><th>Index Number</th><td>{{ user.index_number }}</td></tr>
+            <tr><th>Username</th><td>{{ user.username }}</td></tr>
+            <tr><th>Faculty</th><td>{{ user.faculty_name }}</td></tr>
+            <tr><th>Department</th><td>{{ user.department_name }}</td></tr>
+        </table>
+    </div>
+</div>
+{% endblock %}

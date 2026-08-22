@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="hero" style="background-image: url('{{ url_for('static', filename='images/campus-entrance.jpg') }}');">
+    <div class="hero-overlay">
+        <div class="hero-text">
+            <h1>SEUSL StudyTrack</h1>
+            <p>Stay on top of your assignments, deadlines, and academic progress.</p>
+            <a href="/register" class="btn btn-hero">Get Started</a>
+        </div>
+    </div>
+</div>
+<section class="features">
+    <h2>Why StudyTrack?</h2>
+    <div class="feature-grid">
+        <div class="feature">
+            <h3>📚 Manage Subjects</h3>
+            <p>Add, edit, and organize your courses.</p>
+        </div>
+        <div class="feature">
+            <h3>📝 Track Assignments</h3>
+            <p>Set deadlines, priorities, and statuses.</p>
+        </div>
+        <div class="feature">
+            <h3>📊 Dashboard</h3>
+            <p>See upcoming, overdue, and completed work at a glance.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

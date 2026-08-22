@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="error-page">
+    <div class="error-card">
+        <h1 class="error-code">{{ error_code if error_code else 'Oops!' }}</h1>
+        <h2 class="error-message">{{ error_message if error_message else 'Something went wrong.' }}</h2>
+        <p class="error-desc">
+            The page you are looking for might have been moved, or you don't have permission to view it.
+        </p>
+        <a href="/" class="btn-404">Go Back Home</a>
+    </div>
+</div>
+{% endblock %}

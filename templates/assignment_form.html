@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="login-container">
+    <div class="assignment-card">
+        <form action="{{ url_for('add_assignment') if not assignment else url_for('edit_assignment', id=assignment.id) }}" method="post" class="login-form">
+            <h2 style="text-align: center; margin-bottom: 0;">{{ 'Edit' if assignment else 'Add' }} Assignment</h2>
+
+            <div class="form-group">
+                <label for="subject_id">Subject</label>
+                <select name="subject_id" id="subject_id" required>
+                    <option value="" disabled selected>Select Subject</option>
+                    {% for sub in subjects %}
+                        <option value="{{ sub.id }}" {{ 'selected' if assignment and assignment.subject_id == sub.id else '' }}>
+                            {{ sub.code }} - {{ sub.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="assignment_type">Assignment Type</label>
+                <select name="assignment_type" id="assignment_type" required>
+                    <option value="" selected style="display: none;">Select the Assignment Type</option>
+                    <option value="CA" {{ 'selected' if assignment and assignment.assignment_type == 'CA' else '' }}>CA (Continuous Assessment)</option>
+                    <option value="Projects" {{ 'selected' if assignment and assignment.assignment_type == 'Projects' else '' }}>Projects</option>
+                    <option value="Quiz" {{ 'selected' if assignment and assignment.assignment_type == 'Quiz' else '' }}>Quiz</option>
+                    <option value="Inclass" {{ 'selected' if assignment and assignment.assignment_type == 'Inclass' else '' }}>Inclass Assignment</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" value="{{ assignment.title if assignment else '' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description (Optional)</label>
+                <textarea name="description" id="description" rows="4">{{ assignment.description if assignment else '' }}</textarea>
+            </div>
+
+            <div class="date-row">
+                <div class="date-col">
+                    <label for="assigned_date">Assigned Date</label>
+                    <input type="date" name="assigned_date" id="assigned_date" value="{{ assignment.assigned_date if assignment else '' }}" required>
+                </div>
+                <div class="date-col">
+                    <label for="due_date">Due Date</label>
+                    <input type="date" name="due_date" id="due_date" value="{{ assignment.due_date if assignment else '' }}" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="priority">Priority</label>
+                <select name="priority" id="priority" required>
+                    <option value="Low" {{ 'selected' if assignment and assignment.priority == 'Low' else '' }}>Low</option>
+                    <option value="Medium" {{ 'selected' if assignment and assignment.priority == 'Medium' else '' }}>Medium</option>
+                    <option value="High" {{ 'selected' if assignment and assignment.priority == 'High' else '' }}>High</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select name="status" id="status" required>
+                    <option value="Pending" {{ 'selected' if assignment and assignment.status == 'Pending' else '' }}>Pending</option>
+                    <option value="In Progress" {{ 'selected' if assignment and assignment.status == 'In Progress' else '' }}>In Progress</option>
+                    <option value="Completed" {{ 'selected' if assignment and assignment.status == 'Completed' else '' }}>Completed</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-login">{{ 'Update' if assignment else 'Add' }}</button>
+
+            <a href="/assignments" class="btn btn-cancel">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>My Subjects</h2>
+<a href="/subjects/add" class="btn">Add Subject</a>
+
+<!-- Filters -->
+<form method="get" action="/subjects" class="filters">
+    <input type="text" name="search" placeholder="Search Code or Name..." value="{{ search or '' }}">
+    <select name="year">
+        <option value="" selected style="display: none;">Select Year</option>
+        <option value="1" {% if year_filter == '1' %}selected{% endif %}>Year 1</option>
+        <option value="2" {% if year_filter == '2' %}selected{% endif %}>Year 2</option>
+        <option value="3" {% if year_filter == '3' %}selected{% endif %}>Year 3</option>
+        <option value="4" {% if year_filter == '4' %}selected{% endif %}>Year 4</option>
+    </select>
+    <select name="semester">
+        <option value="" selected style="display: none;">Select Semester</option>
+        <option value="1" {% if semester_filter == '1' %}selected{% endif %}>Semester 1</option>
+        <option value="2" {% if semester_filter == '2' %}selected{% endif %}>Semester 2</option>
+    </select>
+
+    <div class="filter-actions">
+        <button type="submit" class="btn btn-filter">Filter</button>
+        <a href="/subjects" class="btn btn-clear">Clear</a>
+    </div>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Year</th>
+            <th>Semester</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in subjects %}
+        <tr>
+            <td>{{ s.code }}</td>
+            <td>{{ s.name }}</td>
+            <td>Year {{ s.year }}</td>
+            <td>Sem {{ s.semester }}</td>
+            <td class="actions-cell">
+                <a href="/subjects/edit/{{ s.id }}">Edit</a>
+                <form action="/subjects/delete/{{ s.id }}" method="post" class="inline-form">
+                    <button type="submit" class="btn-delete" onclick="return confirmDelete()">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5">No subjects added yet.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

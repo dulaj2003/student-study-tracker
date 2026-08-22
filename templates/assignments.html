@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Assignments</h2>
+<a href="/assignments/add" class="btn">Add Assignment</a>
+
+<!-- Filters -->
+<form method="get" action="/assignments" class="filters">
+    <input type="text" name="search" placeholder="Search..." value="{{ search or '' }}">
+    <select name="status">
+        <option value="">All Statuses</option>
+        <option value="Pending" {% if status_filter == 'Pending' %}selected{% endif %}>Pending</option>
+        <option value="In Progress" {% if status_filter == 'In Progress' %}selected{% endif %}>In Progress</option>
+        <option value="Completed" {% if status_filter == 'Completed' %}selected{% endif %}>Completed</option>
+    </select>
+    <select name="priority">
+        <option value="">All Priorities</option>
+        <option value="Low" {% if priority_filter == 'Low' %}selected{% endif %}>Low</option>
+        <option value="Medium" {% if priority_filter == 'Medium' %}selected{% endif %}>Medium</option>
+        <option value="High" {% if priority_filter == 'High' %}selected{% endif %}>High</option>
+    </select>
+
+    <div class="filter-actions">
+        <button type="submit" class="btn btn-filter">Filter</button>
+        <a href="/assignments" class="btn btn-clear">Clear</a>
+    </div>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th class="header-nowrap">Subject</th>
+            <th class="header-nowrap">Type</th>
+            <th>Title</th> <!-- Title is long, let it wrap if needed -->
+            <th class="header-nowrap">Assigned Date</th>
+            <th class="header-nowrap">Due Date</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in assignments %}
+        <tr>
+            <td class="subject-cell">{{ a.subject_code }}</td>
+            <td>{{ a.assignment_type }}</td>
+            <td>{{ a.title }}</td>
+            <td class="date-cell">{{ a.assigned_date }}</td>
+            <td class="date-cell">{{ a.due_date }}</td>
+            <td>{{ a.priority }}</td>
+            <td class="status-cell">
+                <form action="/assignments/status/{{ a.id }}" method="post" class="status-inline-form">
+                    <select name="status" onchange="this.form.submit()">
+                        <option value="Pending" {% if a.status == 'Pending' %}selected{% endif %}>Pending</option>
+                        <option value="In Progress" {% if a.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+                        <option value="Completed" {% if a.status == 'Completed' %}selected{% endif %}>Completed</option>
+                    </select>
+                </form>
+            </td>
+            <td class="actions-cell">
+                <a href="/assignments/edit/{{ a.id }}">Edit</a>
+                <form action="/assignments/delete/{{ a.id }}" method="post" class="inline-form">
+                    <button type="submit" class="btn-delete" onclick="return confirmDelete()">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="8">No assignments found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="login-container">
+    <div class="assignment-card">
+        <div class="login-header">
+            <h1>Create Account</h1>
+            <p>Register for SEUSL StudyTrack</p>
+        </div>
+
+        <form action="/register" method="post" class="login-form">
+            <div class="form-group">
+                <label for="full_name">Full Name</label>
+                <input type="text" name="full_name" id="full_name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="registration_number">Registration Number</label>
+                <input type="text" name="registration_number" id="registration_number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="index_number">Index Number</label>
+                <input type="text" name="index_number" id="index_number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="faculty_id">Faculty</label>
+                <select name="faculty_id" id="faculty_id" required>
+                    <option value="" disabled selected>Select Faculty</option>
+                    {% for faculty in faculties %}
+                        <option value="{{ faculty.id }}">{{ faculty.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="department_id">Department</label>
+                <select name="department_id" id="department_id" required>
+                    <option value="" disabled selected>Select Department</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                    <input type="password" name="password" id="password" required>
+                    <button type="button" class="toggle-password">
+                        <svg class="eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        <svg class="eye-off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                            <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/>
+                            <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/>
+                            <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.106"/>
+                            <path d="M2 2l20 20"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmation">Confirm Password</label>
+                <div class="password-wrapper">
+                    <input type="password" name="confirmation" id="confirmation" required>
+                    <button type="button" class="toggle-password">
+                        <svg class="eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        <svg class="eye-off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                            <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/>
+                            <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/>
+                            <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.106"/>
+                            <path d="M2 2l20 20"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <button type="submit" class="btn-login">Register</button>
+        </form>
+
+        <div class="login-footer">
+            <p>Already have an account? <a href="/login" class="register-link">Login</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

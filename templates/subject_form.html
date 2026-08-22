@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-card">
+        <form action="{{ url_for('add_subject') if not subject else url_for('edit_subject', id=subject.id) }}" method="post" class="login-form">
+            <h2 style="text-align: center; margin-bottom: 0">{{ 'Edit' if subject else 'Add' }} Subject</h2>
+
+            <div class="form-group">
+                <label for="code">Subject Code</label>
+                <input type="text" name="code" id="code" value="{{ subject.code if subject else '' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Subject Name</label>
+                <input type="text" name="name" id="name" value="{{ subject.name if subject else '' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="year">Year</label>
+                <select name="year" id="year" required>
+                    <option value="" selected style="display: none;">Select Year</option>
+                    <option value="1" {{ 'selected' if subject and subject.year == 1 else '' }}>Year 1</option>
+                    <option value="2" {{ 'selected' if subject and subject.year == 2 else '' }}>Year 2</option>
+                    <option value="3" {{ 'selected' if subject and subject.year == 3 else '' }}>Year 3</option>
+                    <option value="4" {{ 'selected' if subject and subject.year == 4 else '' }}>Year 4</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="semester">Semester</label>
+                <select name="semester" id="semester" required>
+                    <option value="" selected style="display: none;">Select Semester</option>
+                    <option value="1" {{ 'selected' if subject and subject.semester == 1 else '' }}>Semester 1</option>
+                    <option value="2" {{ 'selected' if subject and subject.semester == 2 else '' }}>Semester 2</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-login">{{ 'Update' if subject else 'Add' }}</button>
+
+            <a href="/subjects" class="btn btn-cancel">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

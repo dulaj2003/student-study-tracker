@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEUSL StudyTrack</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/seusl-logo.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">
+                    <img src="{{ url_for('static', filename='images/seusl-logo.png') }}" alt="SEUSL Logo" height="60">
+                </a>
+                <span class="site-title">SEUSL StudyTrack</span>
+            </div>
+
+            <!-- Hamburger Button for Mobile -->
+            <button class="hamburger" id="hamburger-menu" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="/" class="{{ 'active' if request.path == '/' else '' }}">Home</a></li>
+                <li><a href="/directory" class="{{ 'active' if request.path == '/directory' else '' }}">Directory</a></li>
+                <li><a href="/about" class="{{ 'active' if request.path == '/about' else '' }}">About</a></li>
+
+                {% if session.user_id %}
+                    <li><a href="/dashboard" class="{{ 'active' if request.path == '/dashboard' else '' }}">Dashboard</a></li>
+                    <li><a href="/subjects" class="{{ 'active' if request.path == '/subjects' else '' }}">Subjects</a></li>
+                    <li><a href="/assignments" class="{{ 'active' if request.path == '/assignments' else '' }}">Assignments</a></li>
+
+                    <li class="user-block">
+                        <a href="/profile" class="profile-link">
+                            <span class="user-initials">{{ session.user_initials if session.user_initials else 'DN' }}</span>
+                            <span class="profile-text">Profile</span>
+                        </a>
+                        <a href="/logout" class="logout-link">Logout</a>
+                    </li>
+                {% else %}
+                    <li><a href="/login" class="{{ 'active' if request.path == '/login' else '' }}">Login</a></li>
+                    <li><a href="/register" class="btn-nav-cta {{ 'active' if request.path == '/register' else '' }}">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for message in messages %}
+                        <div class="flash">
+                            {{ message }}
+                            <div class="flash-progress"></div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 SEUSL StudyTrack</p>
+            <p>Developed by Dulaj Jayasingha<br>
+            BICT (Hons) Undergraduate<br>
+            Department of Information and Communication Technology<br>
+            Faculty of Technology<br>
+            South Eastern University of Sri Lanka</p>
+            <p>
+                GitHub: <a href="https://github.com/dulaj2003" target="_blank">github.com/dulaj2003</a> |
+                LinkedIn: <a href="https://www.linkedin.com/in/dulaj-jayasingha" target="_blank">linkedin.com/in/dulaj-jayasingha</a>
+            </p>
+            <p><em>Disclaimer: This is not an official SEUSL service.<br>
+            Faculty information referenced from <a href="https://www.seu.ac.lk/" target="_blank">https://www.seu.ac.lk/</a></em></p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

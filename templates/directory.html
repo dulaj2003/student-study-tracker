@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Faculties and Departments</h2>
+
+<div class="directory-grid">
+    {% for faculty in faculties %}
+    <div class="faculty-block">
+        <h3>{{ faculty.name }}</h3>
+        <div class="department-grid">
+            {% for dept in departments %}
+                {% if dept.faculty_id == faculty.id %}
+                    <div class="dept-item">{{ dept.name }}</div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

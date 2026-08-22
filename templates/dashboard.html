@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Dashboard</h2>
+<div class="stats-grid">
+    <div class="stat-card"><span class="stat-number">{{ total }}</span> Total</div>
+    <div class="stat-card"><span class="stat-number">{{ pending }}</span> Pending</div>
+    <div class="stat-card"><span class="stat-number">{{ in_progress }}</span> In Progress</div>
+    <div class="stat-card"><span class="stat-number">{{ completed }}</span> Completed</div>
+    <div class="stat-card overdue"><span class="stat-number">{{ overdue }}</span> Overdue</div>
+    <div class="stat-card upcoming"><span class="stat-number">{{ upcoming }}</span> Due in 7 days</div>
+</div>
+
+<h3>Recent Assignments</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Title</th>
+            <th>Due Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in recent %}
+        <tr>
+            <td>{{ a.subject_name }}</td>
+            <td>{{ a.title }}</td>
+            <td>{{ a.due_date }}</td>
+            <td>
+                {% if a.status %}
+                <span class="status-badge status-{{ a.status|lower|replace(' ', '-') }}">
+                    {{ a.status }}
+                </span>
+                {% endif %}
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4">No assignments yet.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="/assignments" class="btn">View All Assignments</a>
+{% endblock %}

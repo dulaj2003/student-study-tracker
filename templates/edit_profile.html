@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-card" style="max-width: 450px;">
+        <form action="/profile/edit" method="post" class="login-form">
+            <h2 style="text-align: center; margin-bottom: 0;">Edit Profile</h2>
+
+            <div class="form-group">
+                <label for="full_name">Full Name</label>
+                <input type="text" name="full_name" id="full_name" value="{{ user.full_name }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" value="{{ user.username }}" required>
+            </div>
+
+            <div style="border-top: 1px solid #e2e8f0; margin: 1rem 0; width: 100%;"></div>
+
+            <div class="form-group">
+                <label for="current_password">Current Password (Required)</label>
+                <div class="password-wrapper">
+                    <input type="password" name="current_password" id="current_password" placeholder="Enter current password" required>
+                    <button type="button" class="toggle-password">
+                        <svg class="eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        <svg class="eye-off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                            <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/>
+                            <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/>
+                            <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.106"/>
+                            <path d="M2 2l20 20"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="new_password">New Password</label>
+                <div class="password-wrapper">
+                    <input type="password" name="new_password" id="new_password" placeholder="Leave blank to keep same">
+                    <button type="button" class="toggle-password">
+                        <svg class="eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        <svg class="eye-off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                            <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/>
+                            <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/>
+                            <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.106"/>
+                            <path d="M2 2l20 20"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_new_password">Confirm New Password</label>
+                <div class="password-wrapper">
+                    <input type="password" name="confirm_new_password" id="confirm_new_password" placeholder="Leave blank to keep same">
+                    <button type="button" class="toggle-password">
+                        <svg class="eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        <svg class="eye-off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                            <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/>
+                            <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/>
+                            <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.106"/>
+                            <path d="M2 2l20 20"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-login">Update Profile</button>
+            <a href="/profile" class="btn btn-cancel">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
